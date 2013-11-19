@@ -1,27 +1,58 @@
-require '/home/alu4101/datos/homes.rala/LPP/prct07/lib/fraccion.rb'
-
+require "/home/alu4101/datos/homes.rala/LPP/prct07/lib/fraccion.rb"
+require "/home/alu4101/datos/homes.rala/LPP/prct09/my-gem/lib/my_gem/gem/matrices_dispersas.rb"
 class Matriz
     
   attr_accessor :fil, :col, :valor
   
     def initialize(m,n)
       @fil,@col = m, n
-      @valor=Array.new(@fil,0.0)
+      @valor=Array.new(@fil,0)
       i=0      
       while i < @fil
-	 @valor[i]=Array.new(@col,0.0)
+	 @valor[i]=Array.new(@col,0)
 	 i=i+1
       end
-      
+   end
+    #################### METODO NUMERO DE VALORES NULOS ###########################
+   
+   
+   
+    def metodo
+
+      @cnt=0
+      k=0
+     while k<@fil
+	 r=0
+	while r<@col 
+	  puts @valor[k][r]
+	  if (@valor[k][r]==0)
+	    @cnt=@cnt+1
+	  end
+	  r=r+1
+	end
+	k=k+1
+      end
+      if (((@fil*@col)*0.6) < @cnt)  # SI el 60% de la matriz es nula
+	puts " LA MATRIZ ES DISPERSA "
+	MatrizDispersa.new(@fil,@col,@valor)
+        end
     end
+    
+
+    ########################## METODO [] ##################################
+    
     
     def [](i)
       @valor[i]
     end
     
+    
+    ########################### METODO []= #################################
     def []=(i,other)
       @valor[i] = other
     end
+    
+    
 ############# METODO REPRESENTAR UNA CADENA ##############  
     def to_s
       i=0
@@ -99,10 +130,10 @@ class Matriz
 	  i=i+1
 	end
       aux
-    end     
+        
      @valor=Array.new(@fil,0.0)
   end     
-      
+ ########################## METODO == #########################3     
     def ==(other)
       i=0
 	while i<@fil
@@ -121,6 +152,8 @@ class Matriz
       
 end
 
-    
-      
+   @M2 = Matriz.new(2,2)
+	@M2[0]=[0,0]
+	@M2[1]=[0,3]
+   @M2.metodo
     
