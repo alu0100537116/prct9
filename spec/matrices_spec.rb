@@ -1,3 +1,6 @@
+require '/home/alu4101/datos/homes.rala/LPP/prct9/lib/matrices.rb'
+require '/home/alu4101/datos/homes.rala/LPP/prct9/lib/matrices_dispersas.rb'
+require '/home/alu4101/datos/homes.rala/LPP/prct9/lib/matrices_densas.rb'
 
 include Comparable
 include Enumerable

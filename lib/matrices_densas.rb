@@ -1,7 +1,8 @@
-require "/home/alu4101/datos/homes.rala/LPP/prct09/my-gem/lib/my_gem/gem/matrices.rb"
+require '/home/alu4101/datos/homes.rala/LPP/prct9/lib/matrices.rb'
 module My
 class MatrizDensa<Matriz
-	attr_accessor :fil, :col, :valor
+	
+  attr_accessor :fil, :col, :valor
 	
 	
 ############################ INITIALIZE ##################################
@@ -161,29 +162,3 @@ class MatrizDensa<Matriz
      
 end
 end
-
-
-
-
-@M1=My::MatrizDensa.new(2,2)
-@M1[0]=[1,2]
-@M1[1]=[1,2]
-puts " MAX "
-@M1.max
-puts " MIN "
-@M1.min
-# @M1=My::MatrizDensa.new(2,2)
-# @M1[0]=[2,2]
-# @M1[1]=[2,2]
-# @M2=My::MatrizDensa.new(2,2)
-# @M2[0]=[2,2]
-# @M2[1]=[1,1]
-# puts " SUMA" 
-# @M3=@M2+@M1
-# @M3.to_s
-# puts " RESTA "
-# @M3=@M1-@M2
-# @M3.to_s
-# puts " MULTIPLICACION "
-# @M3=@M1*@M2
-# @M3.to_s

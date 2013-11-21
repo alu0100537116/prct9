@@ -1,7 +1,6 @@
-require '/home/alu4233/datos/homes.rala/LPP/prct9/lib/my_gem/gem/matrices.rb'
-
+require '/home/alu4101/datos/homes.rala/LPP/prct9/lib/matrices.rb'
 module My
- class MatrizDispersa<Matriz
+class MatrizDispersa<Matriz
    
  attr_accessor :dfil, :dcol, :dvalor
     def initialize(n,m)

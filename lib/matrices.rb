@@ -1,6 +1,9 @@
-# require '/home/alu4101/datos/homes.rala/LPP/prct07/lib/fraccion.rb'
+require '/home/alu4101/datos/homes.rala/LPP/prct9/lib/matrices_densas.rb'
+require '/home/alu4101/datos/homes.rala/LPP/prct9/lib/matrices_dispersas.rb'
 include Comparable
 include Enumerable
+
+module My
 class Matriz
   
   attr_accessor :fil, :col, :valor
@@ -141,4 +144,4 @@ class Matriz
    end
 
 end
- 
+end
