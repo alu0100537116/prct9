@@ -13,16 +13,17 @@ module My
       end
 ###################################### CONVERSION A DISPERSA #################################     
       
-    def convertir_dispersa  
-      r=0
+    def convertir_dispersa
+      	 
+        r=0
 	h=0
 	while h<@fil
 	  g=0
 	    while g<@col
 		if (@valor[h][g]!=0)
-		    @elementos+=1
-		    @dcol[r]=h
-		    @dfil[r]=g
+		    @elementos=@elementos+1
+		    @dcol[r]=g
+		    @dfil[r]=h
 		    @dvalor[r]=@valor[h][g]
 
 		    r=r+1
@@ -31,6 +32,14 @@ module My
 	    end
 	    h=h+1
 	 end
+	 if ((@fil*@col*0.6) < @elementos)
+	   puts "ERROR tiene que ser matriz dispersa"
+	   @dcol=nil
+	   @dfil=nil
+	   @dvalor=nil
+	   
+	 end
+
     end
   ##################################### METODO TO_S ##############################     
       
@@ -41,7 +50,7 @@ module My
 	    while k<@fil
 	      j=0
 		  while j<@col
-		      if k==@dcol[aux] && j==@dfil[aux]
+		      if j==@dcol[aux] && k==@dfil[aux]
 			    cadena+="#{@dvalor[aux]} "	 
 			    if ((aux+1)<@elementos)
 			      aux=aux+1
@@ -62,32 +71,115 @@ module My
 #################################### METODO GET #######################################
 
     def get(z,x)
-      puts " METODO GET"
       k=0
 	aux=0
 	    while k<@fil
 	      j=0
 		  while j<@col
+		    if aux<@elementos
 		      if x==@dcol[aux] && z==@dfil[aux]
-			return @dvalor[aux]		
-		      end
+			return @dvalor[aux]	
+q		      end
+		    else
+		      return 0
+		    end		
+		    aux=aux+1
 		   j=j+1		      
 		  end
 		k=k+1
 	    end 
-      return 0
      
     end
       
+#################################### METODO SUMA DISPERSA #############################
+    
+  def +(other)
+    x=Matriz.new(@fil,@col)
+    i=0
+    while (i<@fil)
+      j=0
+	while (j<@col)
+	  x.valor[i][j]=self.get(i,j)+other.get(i,j)
 
-       
+	  j=j+1
+	end
+	i=i+1
+    end
+    x
+   end
+  
+#################################### METODO RESTA DISPERSA ############################
+    def -(other)
+    x=Matriz.new(@fil,@col)
+    i=0
+    while (i<@fil)
+      j=0
+	while (j<@col)
+	  x.valor[i][j]=self.get(i,j)-other.get(i,j)
+
+	  j=j+1
+	end
+	i=i+1
+    end
+    x
+   end
+
+#################################### METODO MULTIPLICAR ###############################
+   
+  def  *(other)
+    x=Matriz.new(@col,@fil)
+      i=0
+      while i < @fil
+	j = 0
+	while j < other.col
+	  k = 0
+	  while k < @col
+	    x.valor[i][j] = x.valor[i][j]+ (self.get(i,k)*other.get(k,j))
+	    k=k+1
+	  end
+	  j=j+1
+	end
+	i=i+1
+      end
+      x
+  end
+  
+#################################### METODO MAXIMO ####################################
+  def max
+    i=0
+    aux= @dvalor[0]
+    
+    while i<@elementos
+       if aux < @dvalor[i]
+	 aux = @dvalor[i]
+       end
+      i= i +1
+    end
+
+    
+  end
+#################################### METODO MINIMO ####################################
+    def min
+    i=0
+    aux= @dvalor[0]
+    
+    while i<@elementos
+       if aux > @dvalor[i]
+	 aux = @dvalor[i]
+       end
+      i= i +1
+    end
+
+    
+  end
 #################################### METODO [] ########################################
       
     def [](i)
       @valor[i]
     end
     
-    ######################## METODO []= ###########################################
+    ######################## METODO []= ###########################################    
+    
     def []=(i,other)
       @valor[i]= other
     end
@@ -95,10 +187,5 @@ module My
   end
 end
 
-@M1=My::MatrizDispersa.new(2,2)
-@M1[0]=[1,0]
-@M1[1]=[0,0]
-@M1.convertir_dispersa
-@M1.get(0,0)
-@M1.get(0,1)
-@M1.to_s
+
+
