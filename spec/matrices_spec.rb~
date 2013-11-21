@@ -2,7 +2,7 @@ require '/home/alu4101/datos/homes.rala/LPP/prct09/my-gem/lib/my_gem/matrix.rb'
 include Comparable
 include Enumerable
 
-describe My::Matriz do 
+describe Practica9::Matriz do 
 
   before :each do
       @M1 = Matriz.new(2,2)
@@ -32,7 +32,7 @@ describe My::Matriz do
 
 end
 
-describe My::MatrizDispersa do
+describe Practica9::MatrizDispersa do
   
   before :each do
     @M4 = MatrizDispersa.new(2,2)

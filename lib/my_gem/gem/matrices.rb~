@@ -1,8 +1,11 @@
-require "/home/alu4101/datos/homes.rala/LPP/prct07/lib/fraccion.rb"
-require "/home/alu4101/datos/homes.rala/LPP/prct09/my-gem/lib/my_gem/gem/matrices_dispersas.rb"
+require '/home/alu4101/datos/homes.rala/LPP/prct07/lib/fraccion.rb'
+include Comparable
+include Enumerable
 class Matriz
-    
+  
   attr_accessor :fil, :col, :valor
+  
+  ######################### METODO INITIALIZE MATRIZ ##########################
   
     def initialize(m,n)
       @fil,@col = m, n
@@ -13,30 +16,29 @@ class Matriz
 	 i=i+1
       end
    end
+
+   
     #################### METODO NUMERO DE VALORES NULOS ###########################
    
-   
-   
-    def metodo
-
+    def tipo
       @cnt=0
       k=0
-     while k<@fil
-	 r=0
-	while r<@col 
-	  puts @valor[k][r]
-	  if (@valor[k][r]==0)
-	    @cnt=@cnt+1
-	  end
-	  r=r+1
-	end
-	k=k+1
+      while k<@fil
+	  r=0
+	    while r<@col 
+	      if (@valor[k][r]==0)
+		  @cnt=@cnt+1
+	      end
+	      r=r+1
+	    end
+	  k=k+1
       end
-      puts @cnt
       if (((@fil*@col)*0.6) < @cnt)  # SI el 60% de la matriz es nula
-	puts " LA MATRIZ ES DISPERSA "
-	MatrizDispersa.new(@fil,@col,@valor)
-        end
+	  @bool=true
+	  self.initialize_dispersa(@fil,@col,@valor)
+      else
+	  @bool=false
+      end
     end
     
 
@@ -46,8 +48,7 @@ class Matriz
     def [](i)
       @valor[i]
     end
-    
-    
+        
     ########################### METODO []= #################################
     def []=(i,other)
       @valor[i] = other
@@ -55,39 +56,20 @@ class Matriz
     
     
 ############# METODO REPRESENTAR UNA CADENA ##############  
-    def to_s
-      i=0
-      cadena= ""
-       while i<@fil
-	    j=0
-	    while j<@col
-	      cadena+="#{valor[i][j]} "
-	      j=j+1
-	    end
-	    
-	  cadena+="\n "
-	  i=i+1
-	end
-     cadena
-     
-    end
     
- ############ METODO SUMA DE MATRICES#############
-    def +(other) 
-      
-      aux=Matriz.new(@col,@fil)
-      i=0
-     
-	while i<@fil
-	   j=0
-	  while j<@col
-	    aux[i][j]= valor[i][j] + other[i][j]
-	    j=j+1
-	  end
-	
-	  i=i+1
-	end
-      aux
+    def to_s
+	    i=0
+	    cadena= ""
+	     while i<@fil
+		  j=0
+		  while j<@col
+		   cadena+="#{@valor[i][j]} "
+		      j=j+1
+		  end
+		  cadena+="\n"
+		i=i+1
+	     end
+      puts cadena
     end
     
 ############ METODO MULTIPLICAR UNA MATRIZ ###########
@@ -102,7 +84,7 @@ class Matriz
 	while j < other.col
 	  k = 0
 	  while k < @col
-	    aux[i][j] = (aux[i][j] + valor[i][k])*other[i][k]
+	    aux[i][j] = (aux[i][j] + @valor[i][k])*other[i][k]
 	    k=k+1
 	  end
 	  j=j+1
@@ -124,7 +106,7 @@ class Matriz
 	while i<@fil
 	   j=0
 	  while j<@col
-	    aux[i][j]= valor[i][j] - other[i][j]
+	    aux[i][j]= @valor[i][j] - other[i][j]
 	    j=j+1
 	  end
 	
@@ -134,27 +116,29 @@ class Matriz
         
      @valor=Array.new(@fil,0.0)
   end     
- ########################## METODO == #########################3     
-    def ==(other)
+ ########################## METODO == #########################   
+  
+  
+   def ==(other)
       i=0
+      cnt=0
 	while i<@fil
 	  j=0
 	  while j<@col
-	    if 
-	      valor[i][j] == other[i][j]
-	      j=j+1
-	    else
-	      return false
+	    if (@valor[i][j] != other[i][j])
+	      cnt=cnt+1
 	    end
+	    j=j+1
 	  end
+	  i=i+1
 	end
-    end
-      
-      
-end
+	
+      if(cnt>0)
+	  return false
+      else
+	  return true
+      end
+   end
 
-   @M2 = Matriz.new(2,2)
-	@M2[0]=[0,6]
-	@M2[1]=[0,3]
-   @M2.metodo
-    
+end
+ 
