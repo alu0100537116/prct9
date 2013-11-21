@@ -1,4 +1,4 @@
-require '/home/alu4101/datos/homes.rala/LPP/prct09/my-gem/lib/my_gem/gem/matrices.rb'
+require '/home/alu4233/datos/homes.rala/LPP/prct9/lib/my_gem/gem/matrices.rb'
 
 module My
  class MatrizDispersa<Matriz
@@ -41,12 +41,9 @@ module My
 	    while k<@fil
 	      j=0
 		  while j<@col
-		    puts aux
 		      if k==@dcol[aux] && j==@dfil[aux]
-			puts " HEY "
-			puts aux
 			    cadena+="#{@dvalor[aux]} "	 
-			    if (aux<@elementos)
+			    if ((aux+1)<@elementos)
 			      aux=aux+1
 			    end
 		      else
@@ -59,7 +56,30 @@ module My
 	    end
 	puts cadena
       end  
+
       
+      
+#################################### METODO GET #######################################
+
+    def get(z,x)
+      puts " METODO GET"
+      k=0
+	aux=0
+	    while k<@fil
+	      j=0
+		  while j<@col
+		      if x==@dcol[aux] && z==@dfil[aux]
+			return @dvalor[aux]		
+		      end
+		   j=j+1		      
+		  end
+		k=k+1
+	    end 
+      return 0
+     
+    end
+      
+
        
 #################################### METODO [] ########################################
       
@@ -79,4 +99,6 @@ end
 @M1[0]=[1,0]
 @M1[1]=[0,0]
 @M1.convertir_dispersa
+@M1.get(0,0)
+@M1.get(0,1)
 @M1.to_s

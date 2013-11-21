@@ -1,4 +1,4 @@
-require '/home/alu4101/datos/homes.rala/LPP/prct07/lib/fraccion.rb'
+# require '/home/alu4101/datos/homes.rala/LPP/prct07/lib/fraccion.rb'
 include Comparable
 include Enumerable
 class Matriz
