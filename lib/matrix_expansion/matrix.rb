@@ -1,5 +1,3 @@
-
-
 module MatrixExpansion
 class Matriz
   
